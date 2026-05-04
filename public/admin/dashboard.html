@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <!-- Chart.js for Analytics Graphic -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="logo">RetailMart</div>
+    <nav style="margin-top:10px;">
+      <a href="/admin/dashboard.html" class="admin-nav-item active">Analytics</a>
+      <a href="/admin/products.html" class="admin-nav-item">Products</a>
+      <a href="/admin/categories.html" class="admin-nav-item">Categories</a>
+      <a href="/admin/orders.html" class="admin-nav-item">Orders</a>
+      <a href="/admin/customers.html" class="admin-nav-item">Customers</a>
+      <a href="#" onclick="logout()" class="admin-nav-item" style="margin-top:20px;">Logout</a>
+    </nav>
+  </aside>
+  
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <h2 style="font-size:20px; font-weight:600; color:#1a1a1a;">Analytics Overview</h2>
+      <div style="font-size:13px; color:#616161; background:#fff; padding:6px 12px; border:1px solid #e5e5e5; border-radius:6px; font-weight:500;">
+        📅 Last 7 Days
+      </div>
+    </header>
+    
+    <div class="admin-content">
+      
+      <!-- Key KPI Grid -->
+      <div class="sp-grid">
+        <div class="sp-card">
+          <div class="sp-card-header"><div class="sp-title">Total Sales</div></div>
+          <div class="sp-value" id="totRevenue">-</div>
+          <div class="sp-trend up"><span class="sp-trend-badge">↑ 12.5%</span></div>
+        </div>
+        
+        <div class="sp-card">
+          <div class="sp-card-header"><div class="sp-title">Online Store Sessions</div></div>
+          <div class="sp-value" id="totSessions">-</div>
+          <div class="sp-trend up"><span class="sp-trend-badge">↑ 23.1%</span></div>
+        </div>
+        
+        <div class="sp-card">
+          <div class="sp-card-header"><div class="sp-title">Total Orders</div></div>
+          <div class="sp-value" id="totOrders">-</div>
+          <div class="sp-trend up"><span class="sp-trend-badge">↑ 8.2%</span></div>
+        </div>
+        
+        <div class="sp-card">
+          <div class="sp-card-header"><div class="sp-title">Conversion Rate</div></div>
+          <div class="sp-value" id="totConversion">-</div>
+          <div class="sp-trend down"><span class="sp-trend-badge" style="color:#d82c0d;">↓ 1.2%</span></div>
+        </div>
+        
+        <!-- Large Chart Area -->
+        <div class="sp-card sp-card-wide" style="padding-bottom: 24px;">
+           <div class="sp-card-header" style="margin-bottom: 24px;">
+             <div class="sp-title" style="font-weight:600; font-size:14px; color:#1a1a1a;">Sales over time</div>
+           </div>
+           <div style="height: 300px; width: 100%;">
+             <canvas id="salesChart"></canvas>
+           </div>
+        </div>
+        
+        <!-- Recent Orders Table -->
+        <div class="sp-card sp-card-wide" style="padding:0;">
+          <div style="padding:20px; border-bottom:1px solid #e5e5e5; display:flex; justify-content:space-between; align-items:center;">
+             <div class="sp-title" style="font-weight:600; font-size:14px; color:#1a1a1a;">Recent Activity</div>
+          </div>
+          <table class="admin-table" style="border:none;">
+            <thead><tr><th>ORDER</th><th>CUSTOMER</th><th>DATE</th><th>TOTAL</th><th>STATUS</th></tr></thead>
+            <tbody id="recentOrdersTbody"></tbody>
+          </table>
+        </div>
+
+      </div>
+      
+    </div>
+  </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/admin/dashboard.js"></script>
+</body>
+</html>

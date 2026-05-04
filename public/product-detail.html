@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .product-detail-layout { display: flex; gap: 60px; margin-top: 20px;}
+    .product-images { flex: 1.2; min-width: 400px; display:flex; justify-content:center; align-items:flex-start; padding:40px; background:white; border-radius:var(--radius-lg); border:1px solid var(--color-border); position:sticky; top:20px;}
+    .product-images img { max-width: 100%; max-height: 800px; object-fit: contain; }
+    .product-info { flex: 1; display: flex; flex-direction: column; }
+    
+    .color-swatch-box { display: flex; gap: 12px; margin-bottom: 24px; }
+    .color-swatch { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: var(--transition-smooth); box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+    .color-swatch.active { border: 2px solid var(--color-primary); transform: scale(1.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.15); }
+    
+    .qty-control { display:flex; align-items:center; gap:16px; background:var(--color-bg); width:fit-content; border:1px solid var(--color-border); border-radius:var(--radius-pill); overflow:hidden; margin-bottom: 32px;}
+    .qty-btn { background:none; border:none; padding:12px 20px; cursor:pointer; font-size:18px; color:var(--color-text-main); }
+    .qty-btn:hover { background:#e2e8f0; }
+    .qty-value { font-weight:600; font-size: 16px; width:24px; text-align:center;}
+    
+    /* Gymshark Style Accordion */
+    .accordion-container { margin-top: 40px; border-top: 1px solid var(--color-border); }
+    .accordion-item { border-bottom: 1px solid var(--color-border); }
+    .accordion-header { width: 100%; background: none; border: none; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: var(--font-main); font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-main); text-align: left; transition: color 0.2s;}
+    .accordion-header:hover { color: var(--color-accent); }
+    .accordion-header .icon { font-size: 24px; font-weight: 300; line-height: 1; transition: transform 0.3s; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; opacity: 0; }
+    .accordion-content.active { max-height: 800px; padding-bottom: 24px; opacity: 1; }
+    
+    .accordion-ul { padding-left: 20px; margin-top: 16px; }
+    .accordion-ul li { margin-bottom: 10px; font-size: 15px; line-height: 1.6; color: var(--color-text-main); }
+    .text-block { font-size: 15px; line-height: 1.6; color: var(--color-text-main); white-space: pre-line; }
+    
+    @media(max-width: 900px) { .product-detail-layout { flex-direction: column; gap:32px;} .product-images { min-width:100%; padding:20px; position:relative; top:0;} }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <a href="/" class="header-logo">Retail<span>Mart</span></a>
+    <nav class="header-nav" id="headerNav"></nav>
+  </div>
+</header>
+
+<div class="page-container" id="productDetailContainer">
+  <div class="breadcrumb" style="margin-bottom:40px;">
+    <a href="/">Home</a> / <a href="/products.html" id="pBreadcrumbCat">Collection</a> / <span id="pBreadcrumbName">Item</span>
+  </div>
+  
+  <div class="product-detail-layout">
+    <div class="product-images">
+      <img id="pImage" src="" alt="Product Image">
+    </div>
+    
+    <div class="product-info">
+      <h1 id="pName" style="font-size:32px; line-height:1.2; font-weight:700; margin-bottom:12px; letter-spacing:-1px; text-transform:uppercase;">Loading...</h1>
+      <div id="pRating" style="margin-bottom:24px; color:var(--color-text-muted); font-size:14px;"></div>
+      
+      <div style="margin-bottom:32px;">
+        <span style="font-size:28px; font-weight:700; letter-spacing:-0.5px;">₹<span id="pPrice">0</span></span>
+        <div style="color:var(--color-text-muted); font-size:16px; margin-top:8px;">Original Price: <span id="pOriginalPrice" style="text-decoration:line-through;"></span> <span id="pDiscount" class="badge badge-featured"></span></div>
+      </div>
+      
+      <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:1px; color:var(--color-text-muted); margin-bottom:12px;">Color: <span id="selectedColorName" style="color:var(--color-text-main); font-weight:600;">Obsidian</span></h3>
+      <div class="color-swatch-box">
+        <div class="color-swatch active" style="background-color: #111827;" data-color="Obsidian" onclick="selectColor(this)"></div>
+        <div class="color-swatch" style="background-color: #F8FAFC;" data-color="Ivory" onclick="selectColor(this)" style="border:1px solid #e2e8f0;"></div>
+        <div class="color-swatch" style="background-color: #64748B;" data-color="Slate" onclick="selectColor(this)"></div>
+      </div>
+      
+      <h3 style="font-size:13px; text-transform:uppercase; letter-spacing:1px; color:var(--color-text-muted); margin-bottom:12px;">Quantity</h3>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="adjustQty(-1)">-</button>
+        <div class="qty-value" id="selectedQty">1</div>
+        <button class="qty-btn" onclick="adjustQty(1)">+</button>
+      </div>
+
+      <button id="btnAddToCart" class="btn-primary" style="width:100%; padding:18px; font-size:16px; letter-spacing:1px; text-transform:uppercase;">Add to Bag</button>
+      
+      <div id="pStock" style="font-size:14px; font-weight:600; color:var(--color-text-muted); margin-top:16px; text-align:center;"></div>
+      
+      <!-- GYMSHARK STYLE ACCORDION -->
+      <div class="accordion-container">
+        <!-- Description -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAcc(this)"><span>Description</span><span class="icon">+</span></button>
+          <div class="accordion-content" id="accDescContent"></div>
+        </div>
+        
+        <!-- Size & Fit -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAcc(this)"><span>Size & Fit</span><span class="icon">+</span></button>
+          <div class="accordion-content">
+            <div class="text-block" id="accSizeFit"></div>
+          </div>
+        </div>
+        
+        <!-- Materials & Care -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAcc(this)"><span>Materials & Care</span><span class="icon">+</span></button>
+          <div class="accordion-content">
+            <div class="text-block" id="accMaterials"></div>
+            <div style="margin-top:16px; font-size:13px; color:var(--color-text-muted);">SKU: <span id="accSku"></span></div>
+          </div>
+        </div>
+        
+        <!-- Delivery & Returns -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAcc(this)"><span>Delivery & Returns</span><span class="icon">+</span></button>
+          <div class="accordion-content">
+            <h4 style="font-size:14px; font-weight:600; margin-bottom:8px;">Shipping</h4>
+            <ul class="accordion-ul" style="margin-top:0; margin-bottom:16px;">
+              <li>Standard Delivery - ₹100. Estimated 3-5 working days.</li>
+              <li>Free Standard Delivery on orders over ₹2000.</li>
+              <li>Express Shipping - ₹350. Estimated 1-2 working days.</li>
+            </ul>
+            <h4 style="font-size:14px; font-weight:600; margin-bottom:8px;">Returns</h4>
+            <ul class="accordion-ul" style="margin-top:0;">
+              <li>Free 30-Day Return Policy on all unused pristine items.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<footer class="premium-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Make A Return</a>
+      <a href="/orders.html">Orders</a>
+      <a href="#">Submit a Fake</a>
+    </div>
+    <div class="footer-col">
+      <h4>MY ACCOUNT</h4>
+      <a href="/login.html">Login</a>
+      <a href="/register.html">Register</a>
+    </div>
+    <div class="footer-col">
+      <h4>PAGES</h4>
+      <a href="#">RetailMart Central</a>
+      <a href="#">RetailMart Loyalty</a>
+      <a href="#">Careers</a>
+      <a href="#">About Us</a>
+      <a href="#">Student Discount</a>
+      <a href="#">Training App</a>
+      <a href="#">Factory List</a>
+    </div>
+    <div class="footer-col">
+      <h4>MORE ABOUT RETAILMART</h4>
+      <div class="footer-cards">
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:22px;">RETAILMART<br><span style="font-size:12px;font-weight:600;letter-spacing:2px;">CENTRAL</span></div>
+          <div class="fc-text">BLOG</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:20px;flex-direction:column;justify-content:center;gap:4px;"><span style="font-size:11px;font-weight:600;letter-spacing:1px;opacity:0.9;">RETAILMART</span>STUDENTS</div>
+          <div class="fc-text">15% STUDENT DISCOUNT</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:36px;">✉️</div>
+          <div class="fc-text">EMAIL SIGN UP</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-middle">
+    <div class="payment-icons">
+      <span class="pay-icon" style="background:#142c8e; color:white;">VISA</span>
+      <span class="pay-icon" style="background:#eb001b; color:white;">MC</span>
+      <span class="pay-icon" style="background:#0079C1; color:white;">PayPal</span>
+      <span class="pay-icon" style="background:#000; color:white;"> Pay</span>
+    </div>
+    <div class="social-icons">
+      <a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">X</a><a href="#">TT</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="fb-left">© 2026 | RetailMart Limited | All Rights Reserved. | We Do Retail.</div>
+    <div class="fb-right">
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Modern Slavery</a>
+      <span class="region-selector">🌐 ROW ⌄</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/product-detail.js"></script>
+<script>
+  renderHeaderNav();
+  if(typeof renderCartCount === 'function') renderCartCount();
+</script>
+</body>
+</html>

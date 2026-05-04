@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collection - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .layout-with-sidebar { display: flex; gap: 40px; }
+    .sidebar { width: 240px; flex-shrink: 0; }
+    .sidebar-section h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 12px;
+    }
+    .main-content { flex: 1; }
+    @media(max-width: 768px) { .layout-with-sidebar { flex-direction: column; } .sidebar { width: 100%; } }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <a href="/" class="header-logo">Retail<span>Mart</span></a>
+    <form class="header-search" id="searchForm">
+      <select id="categoryFilter"><option value="">All Categories</option></select>
+      <input type="text" id="searchInput" placeholder="Search collection...">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="header-nav" id="headerNav"></nav>
+  </div>
+</header>
+
+<div class="page-container layout-with-sidebar">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>Categories</h3>
+      <div id="categorySidebar">Loading...</div>
+    </div>
+  </aside>
+  
+  <main class="main-content">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+      <h1 style="font-size: 28px; font-weight:600; letter-spacing:-0.5px;">The Collection</h1>
+      <select id="sortSelect" style="padding:10px 16px; border-radius:var(--radius-pill); border:1px solid var(--color-border); background:var(--color-bg); font-family:var(--font-main); outline:none; cursor:pointer;">
+        <option value="">Sort: Featured</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+      </select>
+    </div>
+    <div class="product-grid" id="productsList">
+      <p style="color:var(--color-text-muted)">Loading elegant catalog...</p>
+    </div>
+  </main>
+</div>
+
+<footer class="premium-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Make A Return</a>
+      <a href="/orders.html">Orders</a>
+      <a href="#">Submit a Fake</a>
+    </div>
+    <div class="footer-col">
+      <h4>MY ACCOUNT</h4>
+      <a href="/login.html">Login</a>
+      <a href="/register.html">Register</a>
+    </div>
+    <div class="footer-col">
+      <h4>PAGES</h4>
+      <a href="#">RetailMart Central</a>
+      <a href="#">RetailMart Loyalty</a>
+      <a href="#">Careers</a>
+      <a href="#">About Us</a>
+      <a href="#">Student Discount</a>
+      <a href="#">Training App</a>
+      <a href="#">Factory List</a>
+    </div>
+    <div class="footer-col">
+      <h4>MORE ABOUT RETAILMART</h4>
+      <div class="footer-cards">
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:22px;">RETAILMART<br><span style="font-size:12px;font-weight:600;letter-spacing:2px;">CENTRAL</span></div>
+          <div class="fc-text">BLOG</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:20px;flex-direction:column;justify-content:center;gap:4px;"><span style="font-size:11px;font-weight:600;letter-spacing:1px;opacity:0.9;">RETAILMART</span>STUDENTS</div>
+          <div class="fc-text">15% STUDENT DISCOUNT</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:36px;">✉️</div>
+          <div class="fc-text">EMAIL SIGN UP</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-middle">
+    <div class="payment-icons">
+      <span class="pay-icon" style="background:#142c8e; color:white;">VISA</span>
+      <span class="pay-icon" style="background:#eb001b; color:white;">MC</span>
+      <span class="pay-icon" style="background:#0079C1; color:white;">PayPal</span>
+      <span class="pay-icon" style="background:#000; color:white;"> Pay</span>
+    </div>
+    <div class="social-icons">
+      <a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">X</a><a href="#">TT</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="fb-left">© 2026 | RetailMart Limited | All Rights Reserved. | We Do Retail.</div>
+    <div class="fb-right">
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Modern Slavery</a>
+      <span class="region-selector">🌐 ROW ⌄</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/products.js"></script>
+<script>
+  renderHeaderNav();
+  renderCartCount();
+  
+  document.getElementById('searchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const q = document.getElementById('searchInput').value;
+    const cat = document.getElementById('categoryFilter').value;
+    window.location.href = `/products.html?search=${q}&category=${cat}`;
+  });
+
+  fetch('/api/categories').then(r=>r.json()).then(cats => {
+    const sel = document.getElementById('categoryFilter');
+    cats.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.slug;
+      opt.textContent = c.name;
+      sel.appendChild(opt);
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('category')) sel.value = urlParams.get('category');
+    if(urlParams.get('search')) document.getElementById('searchInput').value = urlParams.get('search');
+  });
+</script>
+</body>
+</html>

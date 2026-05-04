@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    body { background-color: var(--color-surface); margin: 0; overflow: hidden; }
+    .split-layout { display: flex; height: 100vh; width: 100vw; }
+    .split-image { 
+      flex: 1.2; 
+      background: url('https://images.unsplash.com/photo-1600607686527-6fb886090705?w=1200&q=80') center/cover no-repeat;
+      position: relative;
+    }
+    .split-image::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.2) 100%);
+    }
+    .image-text {
+      position: absolute;
+      bottom: 80px;
+      left: 60px;
+      z-index: 2;
+      color: white;
+      max-width: 500px;
+    }
+    .image-text h2 { font-size: 3rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; line-height: 1.1; }
+    .image-text p { font-size: 1.1rem; opacity: 0.9; line-height: 1.6; }
+    
+    .split-form {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      background: var(--color-surface);
+      overflow-y: auto;
+    }
+    .auth-card { box-shadow: none; border: none; padding: 0; max-width: 440px; margin: 0 auto; width: 100%; }
+    
+    @media (max-width: 900px) {
+      .split-image { display: none; }
+      .split-form { padding: 40px 24px; }
+      body { overflow: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="split-layout">
+  <div class="split-image">
+    <div class="image-text">
+      <h2>Curated Lifestyle.</h2>
+      <p>Sign in to access your exclusive portfolio of premium products and track your orders.</p>
+    </div>
+  </div>
+  
+  <div class="split-form">
+    <div class="auth-card">
+      <a href="/" class="auth-logo" style="margin-bottom: 60px; display:inline-block;">Retail<span>Mart</span></a>
+      
+      <h1 style="text-align:left; font-size: 32px; letter-spacing:-1px; margin-bottom:8px;">Welcome Back</h1>
+      <p style="text-align:left; color:var(--color-text-muted); margin-bottom:40px; font-size:15px;">Please enter your details.</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" required placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; margin-top:24px; padding:18px;">Sign In</button>
+      </form>
+      
+      <div class="auth-divider"><span>New to RetailMart?</span></div>
+      
+      <a href="/register.html" class="btn-secondary" style="display:flex; justify-content:center; text-decoration:none;">Create an account</a>
+    </div>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/cart.js"></script>
+<script>
+  document.getElementById('loginForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+      const res = await apiFetch('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify(res.user));
+      window.location.href = '/';
+    } catch(err) {
+      showToast(err.message, 'error');
+    }
+  });
+</script>
+</body>
+</html>

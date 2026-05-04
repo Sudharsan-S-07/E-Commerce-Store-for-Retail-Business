@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetailMart - Premium E-commerce</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .hero-banner {
+      background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=80') center/cover no-repeat;
+      padding: 160px 40px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 60px 40px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      max-width: 800px;
+      color: white;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 60px 0 30px;
+      letter-spacing: -0.5px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <a href="/" class="header-logo">Retail<span>Mart</span></a>
+    
+    <form class="header-search" id="searchForm">
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search premium products...">
+      <button type="submit">Search</button>
+    </form>
+    
+    <nav class="header-nav" id="headerNav">
+      <!-- Rendered by JS -->
+    </nav>
+  </div>
+  <div class="header-bottom">
+    <nav class="header-bottom-nav">
+      <a href="/products.html">New Arrivals</a>
+      <a href="/products.html?featured=true">Editor's Picks</a>
+      <a href="/products.html?category=electronics">Tech & Audio</a>
+      <a href="/products.html?category=clothing">Designer Wear</a>
+      <a href="/products.html?category=home-kitchen">Living</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero-banner">
+  <div class="hero-content">
+    <h1 class="hero-title">Elevate Your<br>Lifestyle.</h1>
+    <p class="hero-subtitle">Discover a curated collection of premium products designed for the modern aesthetic. Exceptional quality meets unparalleled design.</p>
+    <a href="/products.html" class="btn-primary" style="padding: 18px 48px; font-size: 16px; background: white; color: var(--color-primary);">Explore Collection</a>
+  </div>
+</div>
+
+<div class="page-container">
+  <h2 class="section-title">Curated For You</h2>
+  <div class="product-grid" id="featuredProducts">
+    <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--color-text-muted);">
+      Loading elegant catalog...
+    </div>
+  </div>
+
+  <h2 class="section-title">Just Arrived</h2>
+  <div class="product-grid" id="newArrivals"></div>
+</div>
+
+<footer class="premium-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Make A Return</a>
+      <a href="/orders.html">Orders</a>
+      <a href="#">Submit a Fake</a>
+    </div>
+    <div class="footer-col">
+      <h4>MY ACCOUNT</h4>
+      <a href="/login.html">Login</a>
+      <a href="/register.html">Register</a>
+    </div>
+    <div class="footer-col">
+      <h4>PAGES</h4>
+      <a href="#">RetailMart Central</a>
+      <a href="#">RetailMart Loyalty</a>
+      <a href="#">Careers</a>
+      <a href="#">About Us</a>
+      <a href="#">Student Discount</a>
+      <a href="#">Training App</a>
+      <a href="#">Factory List</a>
+    </div>
+    <div class="footer-col">
+      <h4>MORE ABOUT RETAILMART</h4>
+      <div class="footer-cards">
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:22px;">RETAILMART<br><span style="font-size:12px;font-weight:600;letter-spacing:2px;">CENTRAL</span></div>
+          <div class="fc-text">BLOG</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:20px;flex-direction:column;justify-content:center;gap:4px;"><span style="font-size:11px;font-weight:600;letter-spacing:1px;opacity:0.9;">RETAILMART</span>STUDENTS</div>
+          <div class="fc-text">15% STUDENT DISCOUNT</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:36px;">✉️</div>
+          <div class="fc-text">EMAIL SIGN UP</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-middle">
+    <div class="payment-icons">
+      <span class="pay-icon" style="background:#142c8e; color:white;">VISA</span>
+      <span class="pay-icon" style="background:#eb001b; color:white;">MC</span>
+      <span class="pay-icon" style="background:#0079C1; color:white;">PayPal</span>
+      <span class="pay-icon" style="background:#000; color:white;"> Pay</span>
+    </div>
+    <div class="social-icons">
+      <a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">X</a><a href="#">TT</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="fb-left">© 2026 | RetailMart Limited | All Rights Reserved. | We Do Retail.</div>
+    <div class="fb-right">
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Modern Slavery</a>
+      <span class="region-selector">🌐 ROW ⌄</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/cart.js"></script>
+<script>
+  renderHeaderNav();
+  if(typeof renderCartCount === 'function') renderCartCount();
+
+  fetch('/api/categories').then(r=>r.json()).then(cats => {
+    const sel = document.getElementById('categoryFilter');
+    cats.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.slug;
+      opt.textContent = c.name;
+      sel.appendChild(opt);
+    });
+  });
+
+  document.getElementById('searchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const q = document.getElementById('searchInput').value;
+    const cat = document.getElementById('categoryFilter').value;
+    window.location.href = `/products.html?search=${q}&category=${cat}`;
+  });
+
+  fetch('/api/products?featured=true').then(r=>r.json()).then(products => {
+    document.getElementById('featuredProducts').innerHTML = products.slice(0,4).map(renderProductCard).join('') || '<p>No products featured yet.</p>';
+  });
+
+  fetch('/api/products').then(r=>r.json()).then(products => {
+    document.getElementById('newArrivals').innerHTML = products.slice(0,8).map(renderProductCard).join('') || '';
+  });
+</script>
+</body>
+</html>

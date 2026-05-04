@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication Gateway - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    body { background-color: var(--color-surface); margin: 0; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family: var(--font-main); }
+    
+    .gateway-container {
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+      text-align: center;
+    }
+    
+    .gateway-header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .gateway-header p {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      margin-bottom: 60px;
+    }
+    
+    .role-cards {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+    }
+    
+    .role-card {
+      flex: 1;
+      max-width: 360px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-decoration: none;
+      color: var(--color-text-main);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .role-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    
+    .role-icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    
+    .role-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    
+    .role-desc {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    
+    .role-btn {
+      margin-top: 32px;
+      width: 100%;
+      padding: 16px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: calc(var(--radius-pill));
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition-smooth);
+    }
+    
+    .role-card:hover .role-btn {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .role-cards { flex-direction: column; align-items: center; }
+      .role-card { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="gateway-container">
+  <div class="gateway-header">
+    <a href="/" class="auth-logo" style="margin-bottom: 40px; display:inline-block;">Retail<span>Mart</span></a>
+    <h1>Welcome to RetailMart</h1>
+    <p>Please clarify your authorization level to proceed into the ecosystem.</p>
+  </div>
+  
+  <div class="role-cards">
+    <!-- Customer Login Card -->
+    <a href="/customer-login.html" class="role-card">
+      <div class="role-icon">👤</div>
+      <div class="role-title">Customer Portal</div>
+      <div class="role-desc">Access your curated portfolio, track ongoing orders, and view elite collections.</div>
+      <div class="role-btn">Login as Customer</div>
+    </a>
+    
+    <!-- Admin Login Card -->
+    <a href="/admin/login.html" class="role-card">
+      <div class="role-icon">🛡️</div>
+      <div class="role-title">Store Owner Portal</div>
+      <div class="role-desc">Enter the highly secure command center to orchestrate logistics and product metrics.</div>
+      <div class="role-btn">Login as Store Owner</div>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

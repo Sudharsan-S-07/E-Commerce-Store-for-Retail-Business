@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Products - RetailMart Admin</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="logo">Retail<span>Mart</span> Admin</div>
+    <nav style="margin-top:20px;">
+      <a href="/admin/dashboard.html" class="admin-nav-item">Dashboard</a>
+      <a href="/admin/products.html" class="admin-nav-item active">Products</a>
+      <a href="/admin/categories.html" class="admin-nav-item">Categories</a>
+      <a href="/admin/orders.html" class="admin-nav-item">Orders</a>
+      <a href="/admin/customers.html" class="admin-nav-item">Customers</a>
+      <a href="#" onclick="logout()" class="admin-nav-item" style="margin-top:40px; color:#ff9900;">Logout</a>
+    </nav>
+  </aside>
+  
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <h2 style="font-size:20px; font-weight:400;">Manage Products</h2>
+      <button class="btn-primary" onclick="showModal()" style="padding:6px 16px; border-radius:4px;">Add Product</button>
+    </header>
+    
+    <div class="admin-content">
+      <table class="admin-table">
+        <thead><tr><th>ID</th><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead>
+        <tbody id="productsTbody"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-content" style="max-width:600px;">
+    <div class="modal-header">
+      <h3 style="font-size:18px;">Product Details</h3>
+      <button class="modal-close" onclick="hideModal()">×</button>
+    </div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="form-group"><label>Product Name</label><input type="text" id="name" required></div>
+      <div style="display:flex; gap:16px;">
+        <div class="form-group" style="flex:1;"><label>Selling Price (₹)</label><input type="number" id="price" required></div>
+        <div class="form-group" style="flex:1;"><label>Original Price (₹)</label><input type="number" id="originalPrice"></div>
+      </div>
+      <div style="display:flex; gap:16px;">
+        <div class="form-group" style="flex:1;"><label>Stock</label><input type="number" id="stock" required></div>
+        <div class="form-group" style="flex:1;"><label>Category</label><select id="categoryId"></select></div>
+      </div>
+      <div class="form-group"><label>Image URL</label><input type="text" id="imageUrl"></div>
+      <div class="form-group"><label>Description</label><textarea id="description" rows="3"></textarea></div>
+      <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+        <input type="checkbox" id="isFeatured" style="width:auto;"> <label for="isFeatured" style="margin:0;">Featured Product</label>
+      </div>
+      <button type="submit" class="btn-primary" style="margin-top:16px; width:100%; border-radius:4px;">Save Product</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/admin/products.js"></script>
+</body>
+</html>

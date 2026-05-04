@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History - RetailMart</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    .order-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .order-header {
+      background: var(--color-bg);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .order-header-block { display: flex; flex-direction: column; gap: 4px; }
+    .order-header-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; }
+    .order-header-value { font-size: 15px; font-weight: 500; color: var(--color-text-main); }
+    
+    .order-body { padding: 32px; }
+    .order-item-list { display: flex; flex-direction: column; gap: 24px; }
+    .order-item { display: flex; gap: 24px; align-items: center; }
+    .order-item img { width: 80px; height: 80px; object-fit: contain; background: white; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+    .order-item-name { font-size: 16px; font-weight: 500; text-decoration: none; color: var(--color-text-main); transition: var(--transition-smooth); }
+    .order-item-name:hover { color: var(--color-accent); }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <a href="/" class="header-logo">Retail<span>Mart</span></a>
+    <nav class="header-nav" id="headerNav"></nav>
+  </div>
+</header>
+
+<div class="page-container" style="max-width:1000px;">
+  <div class="breadcrumb" style="margin-bottom:40px;">
+    <a href="/profile.html">Your Account</a> / <span>Order History</span>
+  </div>
+  
+  <h1 style="font-size:32px; font-weight:600; letter-spacing:-1px; margin-bottom:40px;">Order History</h1>
+  
+  <div id="ordersContainer">
+    <p style="color:var(--color-text-muted);">Loading your orders...</p>
+  </div>
+</div>
+
+<footer class="premium-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Returns Policy</a>
+      <a href="#">Make A Return</a>
+      <a href="/orders.html">Orders</a>
+      <a href="#">Submit a Fake</a>
+    </div>
+    <div class="footer-col">
+      <h4>MY ACCOUNT</h4>
+      <a href="/login.html">Login</a>
+      <a href="/register.html">Register</a>
+    </div>
+    <div class="footer-col">
+      <h4>PAGES</h4>
+      <a href="#">RetailMart Central</a>
+      <a href="#">RetailMart Loyalty</a>
+      <a href="#">Careers</a>
+      <a href="#">About Us</a>
+      <a href="#">Student Discount</a>
+      <a href="#">Training App</a>
+      <a href="#">Factory List</a>
+    </div>
+    <div class="footer-col">
+      <h4>MORE ABOUT RETAILMART</h4>
+      <div class="footer-cards">
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:22px;">RETAILMART<br><span style="font-size:12px;font-weight:600;letter-spacing:2px;">CENTRAL</span></div>
+          <div class="fc-text">BLOG</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:20px;flex-direction:column;justify-content:center;gap:4px;"><span style="font-size:11px;font-weight:600;letter-spacing:1px;opacity:0.9;">RETAILMART</span>STUDENTS</div>
+          <div class="fc-text">15% STUDENT DISCOUNT</div>
+        </a>
+        <a href="#" class="footer-card">
+          <div class="fc-img" style="font-size:36px;">✉️</div>
+          <div class="fc-text">EMAIL SIGN UP</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-middle">
+    <div class="payment-icons">
+      <span class="pay-icon" style="background:#142c8e; color:white;">VISA</span>
+      <span class="pay-icon" style="background:#eb001b; color:white;">MC</span>
+      <span class="pay-icon" style="background:#0079C1; color:white;">PayPal</span>
+      <span class="pay-icon" style="background:#000; color:white;"> Pay</span>
+    </div>
+    <div class="social-icons">
+      <a href="#">FB</a><a href="#">IG</a><a href="#">YT</a><a href="#">X</a><a href="#">TT</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="fb-left">© 2026 | RetailMart Limited | All Rights Reserved. | We Do Retail.</div>
+    <div class="fb-right">
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Cookie Policy</a>
+      <a href="#">Modern Slavery</a>
+      <span class="region-selector">🌐 ROW ⌄</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/orders.js"></script>
+<script>
+  renderHeaderNav();
+</script>
+</body>
+</html>
